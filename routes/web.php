@@ -36,6 +36,8 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
+Route::get('/', [PostController::class, 'publicIndex'])->name('public.posts.index');
+
 
 
 

@@ -16,7 +16,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 
     </head>
-    <body class="font-sans antialiased">
+    <body class="bg-gray-100 dark:bg-gray-900">
         @yield('content')
     </body>
 </html>

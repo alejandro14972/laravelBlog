@@ -15,7 +15,14 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view ('posts.index', compact('posts'));
+        return view('posts.index', compact('posts'));
+    }
+
+
+    public function publicIndex()
+    {
+        $posts = Post::all();
+        return view('allPosts', compact('posts'));
     }
 
     /**
@@ -39,7 +46,7 @@ class PostController extends Controller
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $path = Storage::putFile('public/images', $request->file('imagen'));
-            $nuevo_path = str_replace('public/','',$path);
+            $nuevo_path = str_replace('public/', '', $path);
             $post->image_url = $nuevo_path;
         }
 
@@ -50,9 +57,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function view($post)
     {
-        //
+        $post = Post::find($post);
+        return view('posts.view', (compact('post')));
     }
 
     /**
@@ -82,7 +90,7 @@ class PostController extends Controller
         $post = Post::find($post_id);
         /* Storage::delete('file.jpg'); */
         $post->delete();
-        
+
         return redirect()->route('posts.index');
     }
 }
