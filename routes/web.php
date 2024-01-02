@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +17,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//rutas publicas
 Route::get('/', function () {
-    return view('welcome');
+    return view('allPosts', [
+        'posts'=>Post::where('active', true)->get()
+    ]);
 });
+
+
+
+//rutas privadas
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+
+
+
+route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+route::get('/posts/{id}', [PostController::class, 'view'])->name('posts.view'); //resolver esto
+route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+route::get('/posts/delete/{id}', [PostController::class, 'destroy'])->name('posts.delete');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
