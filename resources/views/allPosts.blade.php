@@ -3,7 +3,6 @@
 @section('content')
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             @foreach($posts as $post)
                 <a href="{{route('posts.view', $post->id)}}" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">

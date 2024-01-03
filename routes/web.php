@@ -44,6 +44,8 @@ Route::get('/', [PostController::class, 'publicIndex'])->name('public.posts.inde
 route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 route::get('/posts/{id}', [PostController::class, 'view'])->name('posts.view'); //resolver esto
 route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+route::get('/posts/viewEdit/{id}', [PostController::class, 'viewUpdate'])->name('posts.viewUpdate');
+route::get('/posts/edit/{id}', [PostController::class, 'update'])->name('posts.update');
 route::get('/posts/delete/{id}', [PostController::class, 'destroy'])->name('posts.delete');
 
 

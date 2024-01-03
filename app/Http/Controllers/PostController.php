@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    { /* comprobar que el usuario ersta identificado */
+      $this->middleware('auth')->except(['publicIndex', 'view']); //restringir metodos y otros no para usuariosin autentificar
+    }
     /**
      * Display a listing of the resource.
      */
@@ -17,7 +22,6 @@ class PostController extends Controller
         $posts = Post::all();
         return view('posts.index', compact('posts'));
     }
-
 
     public function publicIndex()
     {
@@ -66,9 +70,15 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit( $post)
     {
         //
+        
+    }
+
+    public function viewUpdate($post) {
+        $post = Post::find($post);
+        return view('posts.viewEdit', (compact('post')));
     }
 
     /**
@@ -77,6 +87,8 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         //
+        dd('hola');
+        
     }
 
     /**

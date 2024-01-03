@@ -11,4 +11,9 @@ class DashboardController extends Controller
         $posts = Post::all();
         return view('dashboard', compact('posts'));
     }
+
+    public function __construct()
+    { /* comprobar que el usuario ersta identificado */
+      $this->middleware('auth'); //restringir metodos y otros no para usuariosin autentificar
+    }
 }

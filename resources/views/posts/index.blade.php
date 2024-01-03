@@ -135,8 +135,8 @@
                             {{ $post->created_at->format('Y-m-d') }}
                         </td>
                         <td class="px-6 py-4 space-x-4">
-                            <a href="{{route('posts.delete', $post->id)}}" class="text-green-400 font-medium">Ver</a>
-                            <a href="{{route('posts.delete', $post->id)}}" class="text-yellow-400 font-medium">Edit</a>
+                            <a href="{{route('posts.view', $post->id)}}" class="text-green-400 font-medium">Ver</a>
+                            <a href="{{route('posts.viewUpdate', $post->id)}}" class="text-yellow-400 font-medium">Edit</a>
                             <a href="{{route('posts.delete', $post->id)}}" class="text-red-400 font-medium">Borrar</a>
                         </td>
                     </tr>
