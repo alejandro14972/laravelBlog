@@ -15,7 +15,15 @@
                         <img class="object-cover w-full rounded-t-lg h-96 md:h-20 md:w-48 md:rounded-none md:rounded-s-lg" src="storage/{{ $post->image_url }}" alt="">
                         <div class="flex flex-col justify-between p-4 leading-normal">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$post->title}}</h5>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{$post->body}}</p>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><span
+                                style="display: inline-block;
+                                width: 180px; /* Ancho máximo deseado */
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis; ">{{ $post->body }}
+                            </span></p>
+                            <p class="text-sm text-gray-500 ">{{$post->created_at->diffForHumans()}}</p>
+                            <p>Creado por: {{ Auth::user()->name }}</p>
                         </div>
                     </a>
                 @endforeach

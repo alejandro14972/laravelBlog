@@ -7,10 +7,8 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="  overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-
-
 
                     <!-- Modal toggle -->
                     <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
@@ -57,7 +55,6 @@
                                                 placeholder="" required>
                                         </div>
 
-
                                         <div>
                                             <label for="body"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -90,7 +87,6 @@
         </div>
     </div>
 
-
     <div class="relative overflow-x-auto ">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -113,7 +109,6 @@
                 </tr>
             </thead>
 
-
             <tbody>
                 @foreach ($posts as $post)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -122,7 +117,13 @@
                             {{ $post->title }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $post->body }}
+                            <span
+                                style="display: inline-block;
+                                width: 180px; /* Ancho máximo deseado */
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis; ">{{ $post->body }}
+                            </span>
                         </td>
                         <td class="px-6 py-4">
                             @if ($post->image_url)
@@ -135,9 +136,10 @@
                             {{ $post->created_at->format('Y-m-d') }}
                         </td>
                         <td class="px-6 py-4 space-x-4">
-                            <a href="{{route('posts.view', $post->id)}}" class="text-green-400 font-medium">Ver</a>
-                            <a href="{{route('posts.viewUpdate', $post->id)}}" class="text-yellow-400 font-medium">Edit</a>
-                            <a href="{{route('posts.delete', $post->id)}}" class="text-red-400 font-medium">Borrar</a>
+                            <a href="{{ route('posts.view', $post->id) }}" class="text-green-400 font-medium">Ver</a>
+                            <a href="{{ route('posts.viewUpdate', $post->id) }}"
+                                class="text-yellow-400 font-medium">Edit</a>
+                            <a href="{{ route('posts.delete', $post->id) }}" class="text-red-400 font-medium">Borrar</a>
                         </td>
                     </tr>
                 @endforeach

@@ -2,6 +2,10 @@
 
 @auth
     @section('content')
+
+    <p class="text-center mt-5 font-bold text-white">Edición del post {{ $post->id }}</p>
+
+
     <div class="p-4 md:p-5">
 
         <form class="space-y-4" action="{{ route('posts.update',  $post->id) }}" method="put"
