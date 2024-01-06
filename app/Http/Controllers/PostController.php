@@ -21,7 +21,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $userPosts = Post::where('author_id', auth()->user()->id)->get();
+        $userPosts = Post::where('user_id', auth()->user()->id)->get();
         return view('posts.index', compact('userPosts'));
     }
 
@@ -55,7 +55,8 @@ class PostController extends Controller
         $post->title = $request->titulo;
         $post->body = $request->body;
         /* $post->author = auth()->user()->name; */
-        $post->author_id = auth()->user()->id;
+        $post->user_id = auth()->user()->id;
+        $post->category_id = $request->categoria;
 
 
         if ($request->hasFile('imagen')) {
@@ -112,6 +113,7 @@ class PostController extends Controller
 
         $post->title = $request->titulo;
         $post->body = $request->body;
+        $post->category_id = $request->categoria;
 
         //controlador del toggle (activo - desactivo) 
         if ($request->activo) {

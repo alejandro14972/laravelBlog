@@ -26,7 +26,8 @@
                             text-overflow: ellipsis; ">{{ $post->body }}
                                         </span></p>
                                     <p class="text-sm text-gray-500 ">{{ $post->created_at->diffForHumans() }}</p>
-                                    <p>Creado por: {{$post->author->name }}</p>
+                                    <p>Creado por: {{$post->user->username }}</p>
+                                    <p>Categoría: {{ $post->categoria->name }}</p>
                                     
                                 </div>
                             </a>

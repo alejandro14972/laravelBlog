@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username'
     ];
 
     /**
@@ -44,8 +45,7 @@ class User extends Authenticatable
     ];
 
     public function posts()
-{
-    return $this->hasMany(Post::class, 'author_id'); //relacion de user con post
-}
-
+    {
+        return $this->hasMany(Post::class, 'user_id'); //relacion de user con post
+    }
 }

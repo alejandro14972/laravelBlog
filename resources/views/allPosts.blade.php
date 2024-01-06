@@ -14,7 +14,7 @@
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     {{ $post->title }}</h5>
                                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $post->body }}</p>
-                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $post->author->name }}</p>
+                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $post->user->username }}</p>
                                 <p class="text-sm text-gray-500 ">{{ $post->created_at->diffForHumans() }}</p>
                             </div>
                         </a>
