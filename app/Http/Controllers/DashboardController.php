@@ -8,8 +8,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
-        return view('dashboard', compact('posts'));
+         $userPosts = Post::where('author_id', auth()->user()->id)->get();
+
+    return view('dashboard', compact('userPosts'));
     }
 
     public function __construct()

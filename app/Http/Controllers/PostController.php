@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -12,15 +14,15 @@ class PostController extends Controller
 
     public function __construct()
     { /* comprobar que el usuario ersta identificado */
-      $this->middleware('auth')->except(['publicIndex', 'view']); //restringir metodos y otros no para usuariosin autentificar
+        $this->middleware('auth')->except(['publicIndex', 'view']); //restringir metodos y otros no para usuariosin autentificar
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('posts.index', compact('posts'));
+        $userPosts = Post::where('author_id', auth()->user()->id)->get();
+        return view('posts.index', compact('userPosts'));
     }
 
     public function publicIndex()
@@ -43,9 +45,18 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'titulo' => 'required|max:255',
+            'body' => 'required|max:255',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Cambiado a 'nullable'
+        ]);
+
         $post = new Post;
         $post->title = $request->titulo;
         $post->body = $request->body;
+        /* $post->author = auth()->user()->name; */
+        $post->author_id = auth()->user()->id;
+
 
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
@@ -70,13 +81,14 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit( $post)
+    public function edit($post)
     {
         //
-        
+
     }
 
-    public function viewUpdate($post) {
+    public function viewUpdate($post)
+    {
         $post = Post::find($post);
         return view('posts.viewEdit', (compact('post')));
     }
@@ -84,11 +96,41 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
         //
-        dd($request->titulo);
-        
+
+        /* dd($request); */
+
+        $post = Post::findOrFail($id);
+
+        $this->validate($request, [
+            'titulo' => 'required|max:255',
+            'body' => 'required|max:255',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $post->title = $request->titulo;
+        $post->body = $request->body;
+
+        //controlador del toggle (activo - desactivo) 
+        if ($request->activo) {
+            $post->active = 1;
+        } else {
+            $post->active = 0;
+        }
+
+        //controlador de la img  
+        if ($request->hasFile('imagen')) {
+            $file = $request->file('imagen');
+            $path = Storage::putFile('public/images', $file);
+            $nuevo_path = str_replace('public/', '', $path);
+            $post->image_url = $nuevo_path;
+        }
+
+        $post->save();
+
+        return redirect()->route('posts.index')->with('mensaje', '¡El post se ha actualizado correctamente!');
     }
 
     /**

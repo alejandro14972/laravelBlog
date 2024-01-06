@@ -17,6 +17,13 @@
                         Nuevo post
                     </button>
 
+
+                    @if (session('mensaje'))
+                        <div class="bg-green-500 p-2 rounded-lg mt-3 text-white uppercase font-bold">
+                            {{ session('mensaje') }}
+                        </div>
+                    @endif
+
                     <!-- Main modal -->
                     <div id="authentication-modal" tabindex="-1" aria-hidden="true"
                         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -101,7 +108,10 @@
                         img
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        date
+                        Estado
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Fecha publicación
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Acción
@@ -110,12 +120,13 @@
             </thead>
 
             <tbody>
-                @foreach ($posts as $post)
+                @foreach ($userPosts as $post)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $post->title }}
                         </th>
+
                         <td class="px-6 py-4">
                             <span
                                 style="display: inline-block;
@@ -125,6 +136,7 @@
                                 text-overflow: ellipsis; ">{{ $post->body }}
                             </span>
                         </td>
+
                         <td class="px-6 py-4">
                             @if ($post->image_url)
                                 <img class="w-20 h-10" src="storage/{{ $post->image_url }}" alt="">
@@ -132,14 +144,39 @@
                                 <p>sin imagen</p>
                             @endif
                         </td>
+
+                        <td class="px-6 py-4">
+
+                            @if ($post->active)
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
+                                    <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2">
+                                        <path d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                        <path d="M10 13c4.97 0 9-2.686 9-6s-4.03-6-9-6-9 2.686-9 6 4.03 6 9 6Z" />
+                                    </g>
+                                </svg>
+                            @else
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M1.933 10.909A4.357 4.357 0 0 1 1 9c0-1 4-6 9-6m7.6 3.8A5.068 5.068 0 0 1 19 9c0 1-3 6-9 6-.314 0-.62-.014-.918-.04M2 17 18 1m-5 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                            @endif
+
+                        </td>
+
                         <td class="px-6 py-4">
                             {{ $post->created_at->format('Y-m-d') }}
                         </td>
+
                         <td class="px-6 py-4 space-x-4">
                             <a href="{{ route('posts.view', $post->id) }}" class="text-green-400 font-medium">Ver</a>
                             <a href="{{ route('posts.viewUpdate', $post->id) }}"
                                 class="text-yellow-400 font-medium">Edit</a>
-                            <a href="{{ route('posts.delete', $post->id) }}" class="text-red-400 font-medium">Borrar</a>
+                            <a href="{{ route('posts.delete', $post->id) }}"
+                                class="text-red-400 font-medium">Borrar</a>
                         </td>
                     </tr>
                 @endforeach
