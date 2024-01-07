@@ -27,6 +27,7 @@ class PostFactory extends Factory
             'body' => $this->faker->paragraph(100),
             'user_id' => $this->faker->randomElement($userids),
             'image_url' => $defaultImageUrl, 
+            'active'=>1,
             'category_id' => $this->faker->randomElement($categoryIds),
         ];
     }

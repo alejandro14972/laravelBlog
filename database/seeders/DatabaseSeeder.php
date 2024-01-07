@@ -22,3 +22,6 @@ class DatabaseSeeder extends Seeder
         Post::factory()->count(10)->create();
     }
 }
+
+
+/* php artisan db:seed --class=class DatabaseSeeder */

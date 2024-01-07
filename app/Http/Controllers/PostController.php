@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +29,8 @@ class PostController extends Controller
     public function publicIndex()
     {
         $posts = Post::all();
-        return view('allPosts', compact('posts'));
+        $categories = Category::all();
+        return view('allPosts', compact('posts', 'categories'));
     }
 
     /**
@@ -79,6 +81,25 @@ class PostController extends Controller
         return view('posts.view', (compact('post')));
     }
 
+
+    public function postsByCategory($category_id)
+    {
+
+      
+
+        $category = Category::find($category_id);
+
+        if (!$category) {
+            // Manejar el caso en el que la categoría no existe
+            return abort(404);
+        }
+
+        $posts = Post::where('category_id', $category_id)->get();
+        $categories = Category::all();
+        return view('posts.categoryPost', compact('posts', 'categories'));
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -100,8 +121,6 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
-
-        /* dd($request); */
 
         $post = Post::findOrFail($id);
 

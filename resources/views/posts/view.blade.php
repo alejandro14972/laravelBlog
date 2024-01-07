@@ -6,16 +6,15 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
                     @if ($post->image_url)
-                        <img class="object-cover w-full h-64 md:h-96" src="{{ asset('storage/' . $post->image_url) }}"
+                        <img class="object-cover w-full h-64 md:h-96" src="{{ asset(/* 'storage/' . */ $post->image_url) }}"
                             alt="con imagen">
                     @else
                         <img class="object-cover w-full h-64 md:h-96" src="{{ asset('images/468833.png') }}" alt="Sin imagen">
                     @endif
                     <div class="p-6">
-                        {{ $post->categoria->name }} {{-- revisar --}}
+                        <p class="mt-4 text-gray-600 dark:text-gray-300">{{ $post->categoria->name }}</p>
                         <h2 class="text-3xl font-semibold text-gray-800 dark:text-white">{{ $post->title }}</h2>
                         <p class="mt-4 text-gray-600 dark:text-gray-300">{{ $post->body }}</p>
-                        
                     </div>
                 </div>
             </div>
@@ -30,7 +29,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
                         @if ($post->image_url)
-                            <img class="object-cover w-full h-64 md:h-96" src="{{ asset('storage/' . $post->image_url) }}"
+                            <img class="object-cover w-full h-64 md:h-96" src="{{ asset(/* 'storage/' . */ $post->image_url) }}"
                                 alt="con imagen">
                         @else
                             <img class="object-cover w-full h-64 md:h-96" src="{{ asset('images/468833.png') }}"alt="Sin imagen">
