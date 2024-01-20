@@ -23,7 +23,8 @@ class PostController extends Controller
     public function index()
     {
         $userPosts = Post::where('user_id', auth()->user()->id)->get();
-        return view('posts.index', compact('userPosts'));
+        $categories = Category::all();
+        return view('posts.index', compact('userPosts', 'categories'));
     }
 
     public function publicIndex()
@@ -110,7 +111,8 @@ class PostController extends Controller
     public function viewUpdate($post)
     {
         $post = Post::find($post);
-        return view('posts.viewEdit', (compact('post')));
+        $categories = Category::all();
+        return view('posts.viewEdit', (compact('post', 'categories')));
     }
 
     /**
