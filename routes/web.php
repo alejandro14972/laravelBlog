@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
@@ -40,14 +41,23 @@ Route::get('/', [PostController::class, 'publicIndex'])->name('public.posts.inde
 
 
 
-
+//rutas post
 route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('/posts/category/{category_id}', [PostController::class, 'postsByCategory'])->name('posts.category');
-route::get('/posts/{id}', [PostController::class, 'view'])->name('posts.view'); 
 route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+route::get('/posts/{id}', [PostController::class, 'view'])->name('posts.view'); 
+Route::get('/posts/category/{category_id}', [PostController::class, 'postsByCategory'])->name('posts.category');
+
+
 route::get('/posts/viewEdit/{id}', [PostController::class, 'viewUpdate'])->name('posts.viewUpdate');
-route::get('/posts/edit/{id}', [PostController::class, 'update'])->name('posts.update');
+route::post('/posts/edit/{id}', [PostController::class, 'update'])->name('posts.update');
 route::get('/posts/delete/{id}', [PostController::class, 'destroy'])->name('posts.delete');
+
+
+//rutas categories
+route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
+
+//rutas comentarios
 
 
 

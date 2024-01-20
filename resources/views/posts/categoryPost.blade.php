@@ -1,8 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-
-
     <div class="flex justify-center mt-3">
         @foreach ($categories as $category)
             <a href="{{ route('posts.category', $category->id) }}"
@@ -11,7 +9,7 @@
             </a>
         @endforeach
     </div>
-    
+
 
 
     <div class="py-12" id="posts-container">
@@ -21,8 +19,8 @@
                     @if ($post->active)
                         <a href="{{ route('posts.view', $post->id) }}"
                             class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                            <img class="object-cover w-full  h-96 md:h-20 md:w-48 ml-3"
-                                src="{{-- storage/ --}}{{ $post->image_url }}" alt="">
+                            <img class="object-cover w-full h-96 md:h-20 md:w-48 ml-3"
+                                src="{{ asset('storage/' . $post->image_url) }}" alt="">
                             <div class="flex flex-col justify-between p-4 leading-normal">
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     {{ $post->title }}</h5>

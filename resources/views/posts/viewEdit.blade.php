@@ -7,9 +7,9 @@
 
         <div class="p-4 md:p-5">
 
-            <form class="space-y-4" action="{{ route('posts.update', $post->id) }}" method="put" enctype="multipart/form-data">
+            <form class="space-y-4" action="{{ route('posts.update', $post->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
+                {{-- @method('PUT') --}}
                 <div>
                     <label for="Título" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Título</label>

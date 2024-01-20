@@ -156,7 +156,7 @@
 
                         <td class="px-6 py-4">
                             @if ($post->image_url)
-                                <img class="w-20 h-10" src="{{-- storage/ --}}{{ $post->image_url }}" alt="">
+                                <img class="w-20 h-10" src="storage/{{ $post->image_url }}" alt="">
                             @else
                                 <p>sin imagen</p>
                             @endif

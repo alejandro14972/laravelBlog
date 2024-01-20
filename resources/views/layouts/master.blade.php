@@ -47,8 +47,8 @@
                         </div>
 
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
-                                Contacto
+                            <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                                Categorias
                             </x-nav-link>
                         </div>
 

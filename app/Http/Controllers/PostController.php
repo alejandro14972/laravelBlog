@@ -15,7 +15,7 @@ class PostController extends Controller
 
     public function __construct()
     { /* comprobar que el usuario ersta identificado */
-        $this->middleware('auth')->except(['publicIndex', 'view']); //restringir metodos y otros no para usuariosin autentificar
+        $this->middleware('auth')->except(['publicIndex', 'view', 'postsByCategory']); //restringir metodos y otros no para usuariosin autentificar
     }
     /**
      * Display a listing of the resource.
@@ -49,7 +49,7 @@ class PostController extends Controller
         //
         $this->validate($request, [
             'titulo' => 'required|max:255',
-            'body' => 'required|max:255',
+            'body' => 'required',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Cambiado a 'nullable'
         ]);
 
@@ -84,9 +84,6 @@ class PostController extends Controller
 
     public function postsByCategory($category_id)
     {
-
-      
-
         $category = Category::find($category_id);
 
         if (!$category) {
@@ -96,6 +93,7 @@ class PostController extends Controller
 
         $posts = Post::where('category_id', $category_id)->get();
         $categories = Category::all();
+        $postCount = $category->posts()->count();
         return view('posts.categoryPost', compact('posts', 'categories'));
     }
 
@@ -126,8 +124,8 @@ class PostController extends Controller
 
         $this->validate($request, [
             'titulo' => 'required|max:255',
-            'body' => 'required|max:255',
-            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'body' => 'required',
+            /* 'imagenw' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', */
         ]);
 
         $post->title = $request->titulo;
@@ -142,12 +140,16 @@ class PostController extends Controller
         }
 
         //controlador de la img  
-        if ($request->hasFile('imagen')) {
+        if ($request->imagen) {
             $file = $request->file('imagen');
             $path = Storage::putFile('public/images', $file);
             $nuevo_path = str_replace('public/', '', $path);
             $post->image_url = $nuevo_path;
+            
         }
+
+    
+       /* dd($post); */
 
         $post->save();
 

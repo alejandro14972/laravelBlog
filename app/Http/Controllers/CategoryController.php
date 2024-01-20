@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -13,6 +15,9 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        $posts = Post::all();
+        $categories = Category::all();
+        return view('categories.categories', compact('posts', 'categories'));
     }
 
     /**

@@ -6,7 +6,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
                     @if ($post->image_url)
-                        <img class="object-cover w-full h-64 md:h-96" src="{{ asset(/* 'storage/' . */ $post->image_url) }}"
+                        <img class="object-cover w-full h-64 md:h-96" src="{{ asset('storage/' . $post->image_url) }}"
                             alt="con imagen">
                     @else
                         <img class="object-cover w-full h-64 md:h-96" src="{{ asset('images/468833.png') }}" alt="Sin imagen">
@@ -29,7 +29,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
                         @if ($post->image_url)
-                            <img class="object-cover w-full h-64 md:h-96" src="{{ asset(/* 'storage/' . */ $post->image_url) }}"
+                            <img class="object-cover w-full h-64 md:h-96" src="{{ asset('storage/' . $post->image_url) }}"
                                 alt="con imagen">
                         @else
                             <img class="object-cover w-full h-64 md:h-96" src="{{ asset('images/468833.png') }}"alt="Sin imagen">
