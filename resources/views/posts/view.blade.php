@@ -14,7 +14,7 @@
                     <div class="p-6">
                         <p class="mt-4 text-gray-600 dark:text-gray-300">{{ $post->categoria->name }}</p>
                         <h2 class="text-3xl font-semibold text-gray-800 dark:text-white">{{ $post->title }}</h2>
-                        <p class="mt-4 text-gray-600 dark:text-gray-300">{{ $post->body }}</p>
+                        <div class="mt-4 text-gray-600 dark:text-gray-300">{!! $post->body !!}</div>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,8 @@
                         @endif
                         <div class="p-6">
                             <h2 class="text-3xl font-semibold text-gray-800 dark:text-white">{{ $post->title }}</h2>
-                            <p class="mt-4 text-gray-600 dark:text-gray-300">{{ $post->body }}</p>
+                            <p class="mt-4 text-gray-600 dark:text-gray-300">{!!$post->body !!}</p>
+
                         </div>
                     </div>
                 </div>
